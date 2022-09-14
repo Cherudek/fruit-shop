@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.R;
 import com.example.myapplication.pojo.Fruit;
 
+
 public class MainActivity extends AppCompatActivity implements Adapter.AdapterOnClickHandler {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -27,9 +28,12 @@ public class MainActivity extends AppCompatActivity implements Adapter.AdapterOn
         setContentView(R.layout.activity_main);
         RecyclerView fruitView = findViewById(R.id.recycler_view);
         FruitViewModel viewModel = new ViewModelProvider(this).get(FruitViewModel.class);
-        Log.d(LOG_TAG, "Fruits: " + viewModel.getFruits().toString());
-        fruitView.setAdapter(new Adapter(this, viewModel.getFruits()));
         fruitView.setLayoutManager(new LinearLayoutManager(this));
+        viewModel.getFruit().observe(MainActivity.this, fruitList -> {
+            Log.d(LOG_TAG, "Observe New Fruits: " + viewModel.getFruit());
+            Adapter adapter = new Adapter(MainActivity.this, fruitList);
+            fruitView.setAdapter(adapter);
+        });
     }
 
     @Override

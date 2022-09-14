@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.R;
 import com.example.myapplication.pojo.Fruit;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
@@ -39,14 +38,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
+        List<Fruit> fruits = this.fruits;
         Fruit fruit = fruits.get(position);
-        Log.d(LOG_TAG, "On Bind View Holder Fruits: " + fruits);
         TextView textView = holder.textView;
         textView.setText(fruit.getType());
     }
 
     @Override
     public int getItemCount() {
+        Log.d(LOG_TAG, "Fruit items count: " + fruits.size());
         return fruits.size();
     }
 
