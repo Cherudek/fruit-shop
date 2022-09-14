@@ -1,63 +1,46 @@
 package com.example.myapplication.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.client.APIClient;
-import com.example.myapplication.client.APIInterface;
 import com.example.myapplication.pojo.Fruit;
-import com.example.myapplication.pojo.Result;
 
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class MainActivity extends AppCompatActivity {
-
-    TextView responseText;
-    APIInterface apiInterface;
+public class MainActivity extends AppCompatActivity implements Adapter.AdapterOnClickHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setUpView();
+    }
+
+    private void setUpView() {
         setContentView(R.layout.activity_main);
-        responseText = findViewById(R.id.textView);
-        apiInterface = APIClient.getClient().create(APIInterface.class);
+        RecyclerView fruitView = findViewById(R.id.recycler_view);
+        fruitView.setHasFixedSize(true);
+        FruitViewModel viewModel = new ViewModelProvider(this).get(FruitViewModel.class);
+        System.out.println("*****************888888 " + viewModel);
+        System.out.println("&&&&&&&&&&&&&&&&&&    " + viewModel.getFruits());
+        fruitView.setAdapter(new Adapter(this, viewModel.getFruits() ));
+        fruitView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
-        Call<Result> call = apiInterface.doGetFruit();
-        call.enqueue(new Callback<>() {
-            @Override
-            public void onResponse(Call<Result> call, Response<Result> response) {
-                Result fruits = response.body();
-                System.out.println("*********************************");
-                System.out.println("Fruits: " + call);
-                System.out.println("Code: " + response.code());
-                System.out.println("Message: " + response.message());
-                System.out.println("Success: " + response.isSuccessful());
-                System.out.println("Fruits: " + fruits.fruit.toString());
-
-                StringBuilder fruitView = new StringBuilder();
-
-                for (Fruit fruit : fruits.fruit) {
-                    fruitView.append(" ").append(fruit.getType()).append(" ").append(fruit.getPrice());
-                }
-
-                responseText.setText(fruitView);
-
-            }
-
-            @Override
-            public void onFailure(Call<Result> call, Throwable t) {
-                call.cancel();
-
-            }
-        });
-
+    @Override
+    public void onClick(String type, Integer price, Integer weight) {
+        Context context = this;
+        Class<DetailActivity> detail = DetailActivity.class;
+        Fruit fruit = new Fruit();
+        fruit.setType(type);
+        fruit.setPrice(price);
+        fruit.setWeight(weight);
+        Intent detailIntent = new Intent(context, detail);
+        detailIntent.putExtra(Intent.EXTRA_TEXT, fruit);
+        startActivity(detailIntent);
     }
 }

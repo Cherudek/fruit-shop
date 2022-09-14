@@ -1,5 +1,8 @@
 package com.example.myapplication.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -10,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "price",
         "weight"
 })
-public class Fruit {
+public class Fruit implements Parcelable {
 
     @JsonProperty("type")
     private String type;
@@ -56,5 +59,17 @@ public class Fruit {
                 ", price=" + price +
                 ", weight=" + weight +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(type);
+        parcel.writeInt(price);
+        parcel.writeInt(weight);
     }
 }
