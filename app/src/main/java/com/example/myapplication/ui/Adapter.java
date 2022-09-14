@@ -1,6 +1,7 @@
 package com.example.myapplication.ui;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,9 @@ import java.util.List;
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     public static final String LOG_TAG = Adapter.class.getName();
+
     private final List<Fruit> fruits;
-    private AdapterOnClickHandler onClickHandler;
+    private final AdapterOnClickHandler onClickHandler;
 
     public Adapter(AdapterOnClickHandler onClickHandler, List<Fruit> fruits) {
         this.onClickHandler = onClickHandler;
@@ -31,14 +33,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View contactView = inflater.inflate(R.layout.list_layout, parent, false);
+        View contactView = inflater.inflate(R.layout.recycler_view_item, parent, false);
         return new ViewHolder(contactView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
         Fruit fruit = fruits.get(position);
-        TextView textView = holder.nameTextView;
+        Log.d(LOG_TAG, "On Bind View Holder Fruits: " + fruits);
+        TextView textView = holder.textView;
         textView.setText(fruit.getType());
     }
 
@@ -47,19 +50,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         return fruits.size();
     }
 
-    // Provide a direct reference to each of the views within a data item
-    // Used to cache the views within the item layout for fast access
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        // Your holder should contain a member variable
-        // for any view that will be set as you render a row
-        public TextView nameTextView;
 
-        // We also create a constructor that accepts the entire item row
-        // and does the view lookups to find each subview
+        public TextView textView;
+
         public ViewHolder(View itemView) {
-            // Stores the itemView in a public final member variable that can be used
-            // to access the context from any ViewHolder instance.
             super(itemView);
+            textView = itemView.findViewById(R.id.textView);
             itemView.setOnClickListener(this);
         }
 

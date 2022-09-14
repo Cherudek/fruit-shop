@@ -3,6 +3,7 @@ package com.example.myapplication.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,6 +15,8 @@ import com.example.myapplication.pojo.Fruit;
 
 public class MainActivity extends AppCompatActivity implements Adapter.AdapterOnClickHandler {
 
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,11 +26,9 @@ public class MainActivity extends AppCompatActivity implements Adapter.AdapterOn
     private void setUpView() {
         setContentView(R.layout.activity_main);
         RecyclerView fruitView = findViewById(R.id.recycler_view);
-        fruitView.setHasFixedSize(true);
         FruitViewModel viewModel = new ViewModelProvider(this).get(FruitViewModel.class);
-        System.out.println("*****************888888 " + viewModel);
-        System.out.println("&&&&&&&&&&&&&&&&&&    " + viewModel.getFruits());
-        fruitView.setAdapter(new Adapter(this, viewModel.getFruits() ));
+        Log.d(LOG_TAG, "Fruits: " + viewModel.getFruits().toString());
+        fruitView.setAdapter(new Adapter(this, viewModel.getFruits()));
         fruitView.setLayoutManager(new LinearLayoutManager(this));
     }
 

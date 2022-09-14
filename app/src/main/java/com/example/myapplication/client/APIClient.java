@@ -10,12 +10,10 @@ public class APIClient {
 
         OkHttpClient client = new OkHttpClient.Builder().build();
 
-        Retrofit retrofit = new Retrofit.Builder()
+        return new Retrofit.Builder()
                 .baseUrl("https://raw.githubusercontent.com")
                 .addConverterFactory(JacksonConverterFactory.create())
                 .client(client)
                 .build();
-
-        return retrofit;
     }
 }
