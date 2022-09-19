@@ -22,34 +22,7 @@ public class Fruit implements Parcelable {
     @JsonProperty("weight")
     private Integer weight;
 
-    public Fruit(Parcel in) {
-        type = in.readString();
-        if (in.readByte() == 0) {
-            price = null;
-        } else {
-            price = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            weight = null;
-        } else {
-            weight = in.readInt();
-        }
-    }
-
-    public static final Creator<Fruit> CREATOR = new Creator<>() {
-        @Override
-        public Fruit createFromParcel(Parcel in) {
-            return new Fruit(in);
-        }
-
-        @Override
-        public Fruit[] newArray(int size) {
-            return new Fruit[size];
-        }
-    };
-
     public Fruit() {
-
     }
 
     @JsonProperty("type")
@@ -90,6 +63,24 @@ public class Fruit implements Parcelable {
                 ", weight=" + weight +
                 '}';
     }
+
+    public Fruit(Parcel in) {
+        type = in.readString();
+        price = in.readInt();
+        weight = in.readInt();
+    }
+
+    public static final Creator<Fruit> CREATOR = new Creator<>() {
+        @Override
+        public Fruit createFromParcel(Parcel in) {
+            return new Fruit(in);
+        }
+
+        @Override
+        public Fruit[] newArray(int size) {
+            return new Fruit[size];
+        }
+    };
 
     @Override
     public int describeContents() {

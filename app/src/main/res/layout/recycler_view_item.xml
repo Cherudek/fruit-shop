@@ -5,8 +5,13 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:gravity="center"
+        android:fontFamily="Arial"
+        android:textSize="30dp"
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_orange_light" />
+        android:background="#FFEA00"
+        android:padding="15dp"
+    android:textColor="@color/black" />
 </LinearLayout>

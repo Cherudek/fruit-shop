@@ -41,7 +41,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         List<Fruit> fruits = this.fruits;
         Fruit fruit = fruits.get(position);
         TextView textView = holder.textView;
-        textView.setText(fruit.getType());
+        String type = fruit.getType();
+        String fruitCap = type.substring(0, 1).toUpperCase().concat(type.substring(1));
+        textView.setText(fruitCap);
     }
 
     @Override
