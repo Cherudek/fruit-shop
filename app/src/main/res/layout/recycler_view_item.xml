@@ -12,7 +12,7 @@
         android:background="#BBDEFB"
         android:fontFamily="Arial"
         android:gravity="center"
-        android:padding="15dp"
+        android:padding="18dp"
         android:textColor="@color/black"
         android:textSize="30sp" />
 </LinearLayout>
