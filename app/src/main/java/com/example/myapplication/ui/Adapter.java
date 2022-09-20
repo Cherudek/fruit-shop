@@ -1,5 +1,7 @@
 package com.example.myapplication.ui;
 
+import static com.example.myapplication.utils.StringFormatter.capitalize;
+
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,9 +43,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         List<Fruit> fruits = this.fruits;
         Fruit fruit = fruits.get(position);
         TextView textView = holder.textView;
-        String type = fruit.getType();
-        String fruitCap = type.substring(0, 1).toUpperCase().concat(type.substring(1));
-        textView.setText(fruitCap);
+        textView.setText(capitalize(fruit.getType()));
     }
 
     @Override

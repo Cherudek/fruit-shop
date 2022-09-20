@@ -1,6 +1,5 @@
 package com.example.myapplication.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +14,9 @@ import com.example.myapplication.config.FruitApplication;
 import com.example.myapplication.pojo.Fruit;
 import com.example.myapplication.R;
 import com.example.myapplication.service.StatsService;
+
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 
 import javax.inject.Inject;
 
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.AdapterOn
         fruitViewModel = new ViewModelProvider(this).get(FruitViewModel.class);
         fruitViewModel.getFruit().observe(MainActivity.this, fruitList -> {
             startTime = System.currentTimeMillis();
+            Log.d(LOG_TAG, "Start Time " + startTime);
             Log.d(LOG_TAG, "Observe New Fruits: " + fruitViewModel.getFruit());
             Adapter adapter = new Adapter(MainActivity.this, fruitList);
             fruitView.setAdapter(adapter);
@@ -64,7 +67,9 @@ public class MainActivity extends AppCompatActivity implements Adapter.AdapterOn
 
     private void generateDisplayTime(RecyclerView view, long startTime) {
         ViewTreeObserver vto = view.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener (() -> displayTime = System.currentTimeMillis() - startTime);
-        statsService.getData("display", displayTime);
+        vto.addOnGlobalLayoutListener(() -> {
+            Log.d(LOG_TAG, "Display Time " + (System.currentTimeMillis() - startTime) );
+            statsService.getData("display", System.currentTimeMillis() - startTime);
+        });
     }
 }

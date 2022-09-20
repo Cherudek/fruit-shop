@@ -1,6 +1,7 @@
 package com.example.myapplication.ui;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -69,6 +70,7 @@ public class FruitViewModel extends AndroidViewModel {
     }
 
     public void generateLoadStats(String event, long data) {
+        Log.d(LOG_TAG, "Generating Load Stats");
         statsService.getData(event, data);
     }
 }
