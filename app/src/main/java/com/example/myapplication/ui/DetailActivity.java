@@ -22,21 +22,18 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity);
+        setTextViews();
+    }
 
+    private void setTextViews() {
         Fruit fruit = getIntent().getParcelableExtra(Intent.EXTRA_TEXT);
-
         Log.d(LOG_TAG, "Reading Main Activity Message: " + fruit);
-
         TextView type = findViewById(R.id.type);
         type.setText(capitalize(fruit.getType()));
-
         TextView priceView = findViewById(R.id.price);
         priceView.setText(priceFormatter(fruit.getPrice()));
-
         TextView weightView = findViewById(R.id.weight);
         weightView.setText(weightFormatter(fruit.getWeight()));
     }
-
-
 
 }

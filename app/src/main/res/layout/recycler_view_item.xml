@@ -9,10 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        android:background="#BBDEFB"
-        android:fontFamily="Arial"
+        android:background="@color/beige"
+        android:fontFamily="@font/inter"
         android:gravity="center"
         android:padding="18dp"
-        android:textColor="@color/black"
+        android:textColor="@color/quasi_black"
         android:textSize="30sp" />
 </LinearLayout>

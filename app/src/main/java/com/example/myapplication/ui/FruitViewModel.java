@@ -32,11 +32,10 @@ public class FruitViewModel extends AndroidViewModel {
 
     @Inject
     @Named("fruits")
-    public Retrofit apiInterface;
+    public Retrofit retrofit;
 
     @Inject
     public StatsService statsService;
-
 
     public FruitViewModel(@NonNull Application application) {
         super(application);
@@ -51,7 +50,7 @@ public class FruitViewModel extends AndroidViewModel {
 
     public void loadFruits() {
         List<Fruit> newFruits = new ArrayList<>();
-        Call<Result> call = apiInterface.create(APIInterface.class).doGetFruit();
+        Call<Result> call = retrofit.create(APIInterface.class).doGetFruit();
         long startTime = System.currentTimeMillis();
         call.enqueue(new Callback<>() {
             @Override

@@ -10,20 +10,17 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.R;
 import com.example.myapplication.config.FruitApplication;
 import com.example.myapplication.pojo.Fruit;
-import com.example.myapplication.R;
 import com.example.myapplication.service.StatsService;
-
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.concurrent.atomic.AtomicReference;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity implements Adapter.AdapterOnClickHandler {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private long displayTime;
     private long startTime;
     @Inject
     public StatsService statsService;
@@ -33,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.AdapterOn
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setUpView();
+        refreshUI();
     }
 
     private void setUpView() {
@@ -40,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements Adapter.AdapterOn
         RecyclerView fruitView = findViewById(R.id.recycler_view);
         fruitView.setLayoutManager(new LinearLayoutManager(this));
         ((FruitApplication) getApplication()).getStatsServiceComponent().inject(this);
-
         fruitViewModel = new ViewModelProvider(this).get(FruitViewModel.class);
         fruitViewModel.getFruit().observe(MainActivity.this, fruitList -> {
             startTime = System.currentTimeMillis();
@@ -50,6 +47,13 @@ public class MainActivity extends AppCompatActivity implements Adapter.AdapterOn
             fruitView.setAdapter(adapter);
         });
         generateDisplayTime(fruitView, startTime);
+    }
+
+    private void refreshUI() {
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> {
+            fruitViewModel.getFruit();
+        });
     }
 
     @Override
@@ -68,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.AdapterOn
     private void generateDisplayTime(RecyclerView view, long startTime) {
         ViewTreeObserver vto = view.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(() -> {
-            Log.d(LOG_TAG, "Display Time " + (System.currentTimeMillis() - startTime) );
+            Log.d(LOG_TAG, "Generating Display Time " + (System.currentTimeMillis() - startTime) );
             statsService.getData("display", System.currentTimeMillis() - startTime);
         });
     }

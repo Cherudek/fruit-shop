@@ -11,7 +11,7 @@ public interface APIInterface {
     @GET("/fmtvp/recruit-test-data/master/data.json")
     Call<Result> doGetFruit();
 
-    @GET("/fmtvp/recruit-test-data/master/stats?")
+    @GET("/fmtvp/recruit-test-data/master/stats")
     Call<String> getStats(@Query("event") String event,
                         @Query("data") long data);
 

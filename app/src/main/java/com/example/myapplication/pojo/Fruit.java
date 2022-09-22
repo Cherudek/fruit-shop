@@ -93,4 +93,6 @@ public class Fruit implements Parcelable {
         parcel.writeInt(price);
         parcel.writeInt(weight);
     }
+
+
 }
