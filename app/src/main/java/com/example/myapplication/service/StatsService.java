@@ -22,18 +22,17 @@ public class StatsService {
     private static Call<String> call;
     @Inject
     @Named("stats")
-    public Retrofit apiInterface;
+    public Retrofit retrofit;
     private MutableLiveData<String> result;
 
     @Inject
     public StatsService() {
-        Log.d(LOG_TAG, "Instantiating Stats Service");
         ((FruitApplication) FruitApplication.getAppContext()).getRetroComponent().inject(this);
     }
 
     public void getData(String event, long data) {
         result = new MutableLiveData<>();
-        call = apiInterface.create(APIInterface.class).getStats(event, data);
+        call = retrofit.create(APIInterface.class).getStats(event, data);
         loadStats();
     }
 
@@ -44,7 +43,6 @@ public class StatsService {
                 Log.d(LOG_TAG, "Generating Stats: " + response.isSuccessful());
                 Log.d(LOG_TAG, "Generating Stats: " + response.code());
                 Log.d(LOG_TAG, "Generating Stats: " + response.message());
-                Log.d(LOG_TAG, "Generating Stats: " + response.body());
                 result.setValue(response.body());
             }
             @Override

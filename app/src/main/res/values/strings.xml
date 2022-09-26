@@ -3,4 +3,6 @@
     <string name="application">Fruit Application</string>
     <string name="price_pounds">£</string>
     <string name="weight_kg">Kg</string>
+    <string name="kiwi">Kiwi</string>
+    <string name="orange">Orange</string>
 </resources>

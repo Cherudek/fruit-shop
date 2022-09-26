@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/alpine_green_lighter</item>
         <item name="colorPrimaryVariant">@color/alpine_green</item>
-        <item name="colorOnPrimary">@color/beige</item>
+        <item name="textFillColor">@color/beige</item>
         <item name="fontFamily">@font/inter_extrabold</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

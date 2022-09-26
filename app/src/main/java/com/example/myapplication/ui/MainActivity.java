@@ -18,7 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity implements Adapter.AdapterOnClickHandler {
+public class MainActivity extends AppCompatActivity implements MainViewAdapter.AdapterOnClickHandler {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private long startTime;
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.AdapterOn
             startTime = System.currentTimeMillis();
             Log.d(LOG_TAG, "Start Time " + startTime);
             Log.d(LOG_TAG, "Observe New Fruits: " + fruitViewModel.getFruit());
-            Adapter adapter = new Adapter(MainActivity.this, fruitList);
+            MainViewAdapter adapter = new MainViewAdapter(MainActivity.this, fruitList);
             fruitView.setAdapter(adapter);
         });
         generateDisplayTime(fruitView, startTime);

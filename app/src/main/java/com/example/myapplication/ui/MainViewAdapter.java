@@ -17,21 +17,21 @@ import com.example.myapplication.pojo.Fruit;
 
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class MainViewAdapter extends RecyclerView.Adapter<MainViewAdapter.ViewHolder> {
 
-    public static final String LOG_TAG = Adapter.class.getName();
+    public static final String LOG_TAG = MainViewAdapter.class.getName();
 
     private final List<Fruit> fruits;
     private final AdapterOnClickHandler onClickHandler;
 
-    public Adapter(AdapterOnClickHandler onClickHandler, List<Fruit> fruits) {
+    public MainViewAdapter(AdapterOnClickHandler onClickHandler, List<Fruit> fruits) {
         this.onClickHandler = onClickHandler;
         this.fruits = fruits;
     }
 
     @NonNull
     @Override
-    public Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MainViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View contactView = inflater.inflate(R.layout.recycler_view_item, parent, false);
@@ -39,7 +39,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MainViewAdapter.ViewHolder holder, int position) {
         List<Fruit> fruits = this.fruits;
         Fruit fruit = fruits.get(position);
         TextView textView = holder.textView;
