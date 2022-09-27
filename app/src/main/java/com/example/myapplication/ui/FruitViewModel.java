@@ -57,6 +57,7 @@ public class FruitViewModel extends AndroidViewModel {
             public void onResponse(Call<Result> call, Response<Result> response) {
                 long responseTime = System.currentTimeMillis() - startTime;
                 newFruits.addAll(response.body().fruit);
+                Log.d(LOG_TAG, "Fruit response: " + newFruits);
                 fruits.setValue(newFruits);
                 generateLoadStats("load", responseTime);
             }

@@ -1,6 +1,6 @@
 package com.example.myapplication.ui;
 
-import static com.example.myapplication.utils.StringFormatter.capitalize;
+import static com.example.myapplication.utils.ValuesFormatter.capitalize;
 
 import android.content.Context;
 import android.util.Log;

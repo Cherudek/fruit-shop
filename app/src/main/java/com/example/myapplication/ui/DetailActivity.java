@@ -1,8 +1,8 @@
 package com.example.myapplication.ui;
 
-import static com.example.myapplication.utils.StringFormatter.capitalize;
-import static com.example.myapplication.utils.StringFormatter.priceFormatter;
-import static com.example.myapplication.utils.StringFormatter.weightFormatter;
+import static com.example.myapplication.utils.ValuesFormatter.capitalize;
+import static com.example.myapplication.utils.ValuesFormatter.priceFormatter;
+import static com.example.myapplication.utils.ValuesFormatter.weightFormatter;
 
 import android.content.Intent;
 import android.os.Bundle;
